@@ -1,0 +1,23 @@
+<div class="sidebar">
+    <div class="logo">
+      <img src="assets/dummylogo.png" alt="Logo" />
+    </div>
+    
+    <div class="menu-items">
+      <app-sidebar-menu-item-component
+        *ngFor="let item of menuItems"
+        [title]="item.title"
+        [iconClass]="item.icon"
+        [isActive]="item.isActive"
+        (click)="setActiveItem(item)">
+      </app-sidebar-menu-item-component>
+    </div>
+
+    <div class="theme-toggle">
+      <app-sidebar-menu-item-component
+        [title]="'Light'"
+        [iconClass]="'fas fa-sun'"
+        (click)="toggleTheme()">
+      </app-sidebar-menu-item-component>
+    </div>
+  </div>

@@ -7,7 +7,7 @@ import { MenuItem } from '../Models/MenuItems';
   selector: 'app-sidebar-component',
   imports: [SidebarMenuItemComponentComponent,CommonModule],
   templateUrl: './sidebar-component.component.html',
-  styleUrl: './sidebar-component.component.scss'
+  styleUrls: ['./sidebar-component.component.scss']
 })
 export class SidebarComponentComponent {
   menuItems: MenuItem[] = [
@@ -19,11 +19,12 @@ export class SidebarComponentComponent {
     { title: 'Analytics', icon: 'assets/analytics.svg', isActive: false },
     { title: 'Settings', icon: 'assets/setting.svg', isActive: false }
   ];
-
+@Output() menuClicked = new EventEmitter<string>();
   setActiveItem(selectedItem: MenuItem): void {
     this.menuItems.forEach(item => {
       item.isActive = item === selectedItem;
     });
+    this.menuClicked.emit(selectedItem.title);
   }
 
   toggleTheme(): void {

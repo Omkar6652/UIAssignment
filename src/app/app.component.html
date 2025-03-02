@@ -1,8 +1,14 @@
 
 <div class="app-container">
-  <app-sidebar-component></app-sidebar-component>
+  <app-sidebar-component (menuClicked)="menuitemClicked($event)"></app-sidebar-component>
   <main class="main-content">
-    <!-- Your main content here -->
+    <app-common-header class="height5vh"></app-common-header>
+    @if (selectedItem == "Reimbursement") {
+      <app-reimbursment></app-reimbursment>
+    }
+    @else {
+      <app-dashboard></app-dashboard>
+    }
   </main>
 </div>
 

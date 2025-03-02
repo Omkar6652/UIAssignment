@@ -1,0 +1,187 @@
+    /* Variables */
+    :root {
+        --primary-color: #3B82F6;
+        --primary-light: #EFF6FF;
+        --success-color: #22C55E;
+        --danger-color: #EF4444;
+        --warning-color: #F59E0B;
+        --info-color: #0EA5E9;
+        --border-radius: 12px;
+        --box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --border-color: #E5E7EB;
+    }
+    
+    /* Card Styling */
+    .surface-card {
+        box-shadow: var(--box-shadow);
+        border-radius: var(--border-radius);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .surface-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+    
+    /* Summary Cards */
+    app-summary-card ::ng-deep .summary-card {
+        padding: 1.5rem;
+        border-radius: var(--border-radius);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+    
+    app-summary-card ::ng-deep .card-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+    
+    app-summary-card ::ng-deep .card-title {
+        font-size: 1rem;
+        color: #6B7280;
+        margin-bottom: 0.5rem;
+    }
+    
+    app-summary-card ::ng-deep .card-value {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+    
+    app-summary-card ::ng-deep .card-footer {
+        margin-top: auto;
+        display: flex;
+        align-items: center;
+        font-size: 0.875rem;
+    }
+    
+    /* User Lists */
+    .user-list {
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        overflow: hidden;
+    }
+    
+    .user-header {
+        background-color: #F9FAFB;
+    }
+    
+    app-profile-item ::ng-deep .profile-item {
+        padding: 0.75rem 1rem;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        align-items: center;
+        transition: background-color 0.2s;
+    }
+    
+    app-profile-item ::ng-deep .profile-item:hover {
+        background-color: #F9FAFB;
+    }
+    
+    app-profile-item ::ng-deep .profile-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        margin-right: 0.75rem;
+        object-fit: cover;
+    }
+    
+    app-profile-item ::ng-deep .profile-name {
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+    
+    app-profile-item ::ng-deep .profile-role {
+        font-size: 0.75rem;
+        color: #6B7280;
+    }
+    
+    app-profile-item ::ng-deep .profile-amount {
+        margin-left: auto;
+        font-weight: 600;
+    }
+    
+    /* Overall Summary */
+    .summary-item:last-child {
+        border-bottom: none !important;
+    }
+    
+    /* Footer Sections */
+    app-contact-section ::ng-deep .contact-card,
+    app-resource-section ::ng-deep .resource-card {
+        border-radius: var(--border-radius);
+        padding: 1.5rem;
+        box-shadow: var(--box-shadow);
+        height: 100%;
+    }
+    
+    app-contact-section ::ng-deep .contact-item,
+    app-resource-section ::ng-deep .resource-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+        padding: 0.75rem;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s;
+    }
+    
+    app-contact-section ::ng-deep .contact-item:hover,
+    app-resource-section ::ng-deep .resource-item:hover {
+        background-color: #F9FAFB;
+    }
+    
+    app-contact-section ::ng-deep .contact-icon,
+    app-resource-section ::ng-deep .resource-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 1rem;
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+        .grid > div {
+        margin-bottom: 1rem;
+        display: flex;
+        flex-direction: row;
+        }
+        
+        app-summary-card ::ng-deep .card-value {
+        font-size: 1.5rem;
+        }
+    }
+    
+    /* Button Styling */
+    button.p-button-text {
+        color: var(--primary-color);
+        font-weight: 600;
+    }
+    
+    button.p-button-text:hover {
+        background-color: var(--primary-light);
+    }
+    
+    /* Dropdown Styling */
+    p-dropdown ::ng-deep .p-dropdown {
+        border-radius: 0.5rem;
+        border: 1px solid var(--border-color);
+    }
+    
+    /* Animation for newly loaded data */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    .animate-in {
+        animation: fadeIn 0.4s ease-out forwards;
+    }

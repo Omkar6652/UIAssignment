@@ -1,5 +1,6 @@
 <div class="sidebar-tile" [class.active]="isActive">
-   <img [src]="iconClass"/>
+
+   <div libSvgElement [appSvg]="iconClass" [svgSize]="'32'" [fill-color]="svgColor"></div>
     <span class="title">{{ title }}</span>
   </div>
   

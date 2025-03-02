@@ -1,0 +1,82 @@
+<div class="reimbursement-container">
+    <div class="header">
+      <h1>Reimbursement</h1>
+      <div class="header-actions">
+        <span class="p-input-icon-left search-box">
+          <i class="pi pi-search"></i>
+          <input type="text" pInputText placeholder="Search" />
+        </span>
+        <button pButton icon="pi pi-cog" class="p-button-rounded p-button-text"></button>
+      </div>
+    </div>
+  
+    <div class="tab-container">
+      <ul class="tab-list">
+        <li *ngFor="let tab of tabs" 
+            [class.active]="selectedTab === tab"
+            (click)="selectTab(tab)">
+          {{ tab }}
+        </li>
+      </ul>
+      
+      <div class="actions-container">
+        <button pButton icon="pi pi-calendar" class="p-button-text"></button>
+        <button pButton icon="pi pi-filter" class="p-button-text"></button>
+        <button pButton icon="pi pi-download" class="p-button-text"></button>
+      </div>
+    </div>
+  
+    <p-table [value]="reimbursements" 
+            styleClass="p-datatable-sm"
+            [paginator]="true" 
+            [rows]="10"
+            [showCurrentPageReport]="true"
+            currentPageReportTemplate="Page {currentPage} of {totalPages}"
+            [rowsPerPageOptions]="[10, 15, 20]">
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Category</th>
+          <th>Username</th>
+          <th>Department</th>
+          <th>Last update</th>
+          <th>Status</th>
+          <th>Amount</th>
+          <th>Actions</th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-reimbursement>
+        <tr>
+          <td>{{ reimbursement.title }}</td>
+          <td>{{ reimbursement.date }}</td>
+          <td>{{ reimbursement.category }}</td>
+          <td>
+            <div class="user-cell">
+              <!-- Placeholder for user avatar -->
+              <div class="user-avatar"></div>
+              <span>{{ reimbursement.username }}</span>
+            </div>
+          </td>
+          <td>{{ reimbursement.department }}</td>
+          <td>{{ reimbursement.lastUpdate }}</td>
+          <td>
+            <span class="status-badge" [ngClass]="reimbursement.status.toLowerCase()">
+              {{ reimbursement.status }}
+            </span>
+          </td>
+          <td>{{ reimbursement.amount }}</td>
+          <td>
+            <button pButton icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="paginatorleft">
+        <div class="pagination-info">Page 1 of 100</div>
+      </ng-template>
+      <ng-template pTemplate="paginatorright">
+        <button pButton icon="pi pi-chevron-left" class="p-button-text"></button>
+        <button pButton icon="pi pi-chevron-right" class="p-button-text"></button>
+      </ng-template>
+    </p-table>
+  </div>

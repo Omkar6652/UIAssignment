@@ -9,6 +9,7 @@
         [title]="item.title"
         [iconClass]="item.icon"
         [isActive]="item.isActive"
+        [svgColor]="'#FFf'"
         (click)="setActiveItem(item)">
       </app-sidebar-menu-item-component>
     </div>
@@ -16,7 +17,7 @@
     <div class="theme-toggle">
       <app-sidebar-menu-item-component
         [title]="'Light'"
-        [iconClass]="'fas fa-sun'"
+        [iconClass]="'assets/sun.svg'"
         (click)="toggleTheme()">
       </app-sidebar-menu-item-component>
     </div>

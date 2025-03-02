@@ -68,3 +68,36 @@
       }
     }
   }
+  .height5vh{
+    height: 5vh;
+  }
+  .layout-wrapper {
+    display: flex;
+    min-height: 100vh;
+    background-color: var(--surface-ground);
+  }
+  
+  .layout-sidebar {
+    flex: 0 0 auto;
+    z-index: 999;
+    
+    @media screen and (max-width: 768px) {
+      position: fixed;
+      left: 0;
+      top: 0;
+      height: 100vh;
+      transform: translateX(-100%);
+      transition: transform 0.3s;
+      
+      &.active {
+        transform: translateX(0);
+      }
+    }
+  }
+  
+  .layout-content {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }

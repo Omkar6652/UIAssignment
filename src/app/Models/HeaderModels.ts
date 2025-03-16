@@ -12,3 +12,16 @@ export interface NotificationItem {
   isRead: boolean;
   type: 'notification' | 'announcement';
 }
+
+export interface UserProfileMenuItem {
+  label: string;
+  icon: string;
+  action?: () => void;
+  divider?: boolean;
+}
+
+export interface UserProfileData {
+  name: string;
+  email: string;
+  avatar: string;
+}

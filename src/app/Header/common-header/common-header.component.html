@@ -17,9 +17,24 @@
         <app-notification-panel></app-notification-panel>
       }
     </div>
-    <div class="username">{{name}}'s</div>
+    <!-- <div class="username">{{name}}'s</div>
     <div class="avatar">
       <img src="assets/DummyIcon.svg" alt="User Avatar" />
+    </div> -->
+    <div class="user-profile-wrapper" (click)="toggleUserProfile($event)">
+      <div class="user-info flex align-items-center gap-2 cursor-pointer">
+        <span class="username">{{userProfileData.name}}</span>
+        <div class="avatar">
+          <img [src]="userProfileData.avatar" alt="User Avatar" />
+        </div>
+        <i class="pi pi-chevron-down text-sm"></i>
+      </div>
+      @if (showUserProfile) {
+        <app-user-profile-dropdown 
+          [userData]="userProfileData"
+          [menuItems]="userProfileMenu">
+        </app-user-profile-dropdown>
+      }
     </div>
   </div>
 </div>

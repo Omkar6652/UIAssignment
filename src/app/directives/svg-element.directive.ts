@@ -36,7 +36,9 @@ export class SvgElementDirective implements OnInit ,OnChanges {
         this.handleSvgData(data);
       },
       error: (error) => {
-        if (error.statusText == "Not Found") {
+        console.error(`Failed to load SVG: ${this.svgSource}`, error);
+        // Only try fallback if original path was not already the fallback
+        if (!this.svgSource.includes('status.svg')) {
           this.svgSource = "assets/Solid/status.svg";
           this.loadSvgData();
         }

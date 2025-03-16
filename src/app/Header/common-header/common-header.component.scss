@@ -14,20 +14,23 @@
   }
   
   .icon-button {
+    position: relative;
     display: flex;
     align-items: center;
-  }
   
-  .icon-button :deep(.p-button) {
-    min-width: 36px;
-    height: 36px;
-    background-color: #f8f9fa;
-    border: none;
-    color: #5f6368;
-  }
+    :deep(.p-button) {
+      min-width: 36px;
+      height: 36px;
+      background-color: #f8f9fa;
+      border: none;
+      color: #5f6368;
+      transition: all 0.2s;
   
-  .icon-button :deep(.p-button:hover) {
-    background-color: #f0f0f0;
+      &:hover {
+        background-color: var(--primary-color);
+        color: white;
+      }
+    }
   }
   
   .username {
@@ -49,3 +52,38 @@
     height: 100%;
     object-fit: cover;
   }
+
+.quick-add {
+  :deep(.p-button) {
+    min-width: 36px;
+    height: 36px;
+    padding: 0;
+    transition: all 0.2s ease;
+    
+    .p-button-label {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      gap: 8px;
+    }
+
+    .quick-add-text, 
+    .arrow-icon {
+      width: 0;
+      opacity: 0;
+      display: none;
+    }
+
+    &:hover {
+      background-color: #87CEEB;
+      min-width: 125px;
+
+      .quick-add-text, 
+      .arrow-icon {
+        width: auto;
+        opacity: 1;
+        display: inline-block;
+      }
+    }
+  }
+}

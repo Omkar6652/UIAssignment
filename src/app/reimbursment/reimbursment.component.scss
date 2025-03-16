@@ -27,6 +27,17 @@
     margin-right: 0.5rem;
   }
   
+  .search-box {
+    .pi-search {
+      color: #6c757d;
+      font-size: 0.875rem;
+      margin-left: 0.5rem;
+    }
+    input {
+      padding-left: 2rem;
+    }
+  }
+  
   .tab-container {
     display: flex;
     justify-content: space-between;
@@ -135,4 +146,37 @@
   
   :host ::ng-deep .p-paginator .p-paginator-current {
     margin-left: auto;
+  }
+
+  .action-buttons {
+    display: none;  // Hide by default
+    gap: 0.25rem;  // Decreased from 0.5rem
+    justify-content: flex-end;
+  
+    &.visible {
+      display: flex;  // Show when visible class is present
+    }
+  
+    :deep(.p-button) {
+      width: 2rem;
+      height: 2rem;
+      
+      &.p-button-success:hover {
+        color: var(--green-600);
+      }
+      
+      &.p-button-danger:hover {
+        color: var(--red-600);
+      }
+    }
+  }
+  
+  .p-datatable {
+    tr {
+      cursor: pointer;
+      
+      &:hover {
+        background-color: var(--surface-hover);
+      }
+    }
   }

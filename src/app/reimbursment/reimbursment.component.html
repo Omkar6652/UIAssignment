@@ -26,7 +26,7 @@
       </div>
     </div>
   
-    <p-table [value]="reimbursements" 
+    <p-table [value]="filteredReimbursements" 
             styleClass="p-datatable-sm"
             [paginator]="true" 
             [rows]="10"
@@ -47,7 +47,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-reimbursement>
-        <tr>
+        <tr (click)="selectRow(reimbursement.id)">
           <td>{{ reimbursement.title }}</td>
           <td>{{ reimbursement.date }}</td>
           <td>{{ reimbursement.category }}</td>
@@ -67,7 +67,24 @@
           </td>
           <td>{{ reimbursement.amount }}</td>
           <td>
-            <button pButton icon="pi pi-ellipsis-h" class="p-button-text p-button-rounded"></button>
+            <div class="action-buttons" [class.visible]="selectedRowId === reimbursement.id">
+              <button pButton icon="pi pi-check-circle" 
+                      class="p-button-rounded p-button-text p-button-success"></button>
+              <button pButton icon="pi pi-times-circle" 
+                      class="p-button-rounded p-button-text p-button-danger"></button>
+              <button pButton icon="pi pi-ellipsis-h" 
+                      class="p-button-rounded p-button-text"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td colspan="9" class="text-center p-4">
+            <div class="flex flex-column align-items-center">
+              <i class="pi pi-inbox text-500 text-6xl mb-3"></i>
+              <span class="text-500">No reimbursements found</span>
+            </div>
           </td>
         </tr>
       </ng-template>

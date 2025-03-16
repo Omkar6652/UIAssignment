@@ -1,15 +1,25 @@
 <!-- HTML Template -->
 <div class="header">
-    <div class="right-side">
-      <div class="icon-button">
-        <p-button icon="pi pi-plus" severity="secondary" [text]="true" [rounded]="true"></p-button>
-      </div>
-      <div class="icon-button notification">
-        <p-button icon="pi pi-bell" severity="secondary" [text]="true" [rounded]="true"></p-button>
-      </div>
-      <div class="username">Mayank's</div>
-      <div class="avatar">
-        <img src="assets/DummyIcon.svg" alt="User Avatar" />
-      </div>
+  <div class="right-side">
+    <div class="icon-button quick-add" (click)="toggleAddMenu($event)">
+      <p-button [text]="true" [rounded]="true">
+        <i class="pi pi-plus"></i>
+        <span class="quick-add-text">Quick Add</span>
+        <i class="pi pi-chevron-down arrow-icon"></i>
+      </p-button>
+      @if (showAddMenu) {
+        <app-header-dropdown [menuItems]="addMenuItems"></app-header-dropdown>
+      }
+    </div>
+    <div class="icon-button notification" (click)="toggleNotifications($event)">
+      <p-button icon="pi pi-bell" severity="secondary" [text]="true" [rounded]="true"></p-button>
+      @if (showNotifications) {
+        <app-notification-panel></app-notification-panel>
+      }
+    </div>
+    <div class="username">{{name}}'s</div>
+    <div class="avatar">
+      <img src="assets/DummyIcon.svg" alt="User Avatar" />
     </div>
   </div>
+</div>

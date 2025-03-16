@@ -13,6 +13,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { TooltipModule } from 'primeng/tooltip';
 
 export interface Reimbursement {
+  id: string;  // Add this line
   title: string;
   date: string;
   category: string;
@@ -24,7 +25,7 @@ export interface Reimbursement {
 }
 @Component({
   selector: 'app-reimbursment',
-  imports: [  CommonModule,TableModule],
+  imports: [  CommonModule, TableModule, ButtonModule],
   templateUrl: './reimbursment.component.html',
   styleUrls: ['./reimbursment.component.scss']
 })
@@ -33,13 +34,14 @@ export class ReimbursmentComponent implements OnInit {
   reimbursements: Reimbursement[] = [];
   selectedTab: string = 'All';
   tabs: string[] = ['All', 'Awaiting Reimbursement', 'Reimbursed'];
-
- 
+  selectedRowId: string | null = null;
+  filteredReimbursements: Reimbursement[] = [];
 
   constructor() {}
     loadReimbursements() {
       this.reimbursements = [
         {
+          id: '1',  // Add ids to each reimbursement
           title: 'Indoor game with trekival team',
           date: '12/01/2020',
           category: 'Games',
@@ -50,6 +52,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 1,389'
         },
         {
+          id: '2',
           title: 'Client meeting at Ashoka Hotel',
           date: '17/01/2020',
           category: 'Hotel',
@@ -60,6 +63,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 10,922'
         },
         {
+          id: '3',
           title: 'Office snacks for the team',
           date: '15/01/2020',
           category: 'Entertainment',
@@ -70,6 +74,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 1,396'
         },
         {
+          id: '4',
           title: 'Business meeting at my office',
           date: '01/04/2020',
           category: 'General',
@@ -80,6 +85,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 12,579'
         },
         {
+          id: '5',
           title: 'Business Lunch with a client',
           date: '12/01/2020',
           category: 'Food',
@@ -90,6 +96,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 7,743'
         },
         {
+          id: '6',
           title: 'Conference seminar',
           date: '21/01/2020',
           category: 'Current Events',
@@ -100,6 +107,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 10,836'
         },
         {
+          id: '7',
           title: 'Trip to Mumbai for business conference',
           date: '15/01/2020',
           category: 'Travel',
@@ -110,6 +118,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 42,970'
         },
         {
+          id: '8',
           title: 'Getting purchase for upcoming event',
           date: '05/01/2020',
           category: 'Festival',
@@ -120,6 +129,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 476'
         },
         {
+          id: '9',
           title: 'Purchase of sports equipment for team members',
           date: '31/01/2020',
           category: 'Sports',
@@ -130,6 +140,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 19,220'
         },
         {
+          id: '10',
           title: 'Business Lunch with a client',
           date: '14/01/2020',
           category: 'Food',
@@ -140,6 +151,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 2,084'
         },
         {
+          id: '11',
           title: 'OYO subscription',
           date: '11/01/2020',
           category: 'Fitness',
@@ -150,6 +162,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 11,022'
         },
         {
+          id: '12',
           title: 'Electricity bill for July month',
           date: '24/03/2020',
           category: 'Electricity',
@@ -160,6 +173,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 72,873'
         },
         {
+          id: '13',
           title: 'Business Lunch with a client',
           date: '20/04/2020',
           category: 'Food',
@@ -170,6 +184,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 27,837'
         },
         {
+          id: '14',
           title: 'WordPress subscription',
           date: '21/01/2020',
           category: 'WordPress',
@@ -180,6 +195,7 @@ export class ReimbursmentComponent implements OnInit {
           amount: '₹ 18,487'
         },
         {
+          id: '15',
           title: 'Trip to Chennai for Business conference',
           date: '13/03/2020',
           category: 'TSM',
@@ -194,6 +210,7 @@ export class ReimbursmentComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadReimbursements();
+    this.filteredReimbursements = this.reimbursements; // Initialize with all items
   }
 
   ngAfterViewInit() {
@@ -203,6 +220,19 @@ export class ReimbursmentComponent implements OnInit {
   
   selectTab(tab: string) {
     this.selectedTab = tab;
+    if (tab === 'All') {
+      this.filteredReimbursements = this.reimbursements;
+    } else if (tab === 'Awaiting Reimbursement') {
+      this.filteredReimbursements = this.reimbursements.filter(r => 
+        r.status.toLowerCase() === 'screening');
+    } else if (tab === 'Reimbursed') {
+      this.filteredReimbursements = this.reimbursements.filter(r => 
+        r.status.toLowerCase() === 'paid' || r.status.toLowerCase() === 'approved');
+    }
+  }
+
+  selectRow(id: string) {
+    this.selectedRowId = this.selectedRowId === id ? null : id;
   }
 
   getStatusClass(status: string): string {

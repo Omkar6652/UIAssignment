@@ -33,6 +33,7 @@ export class DashboardComponent implements OnInit {
   topUsers: User[] = [];
   topViolators: User[] = [];
   overallSummary: TotalSummary[] = [];
+  dateRange: Date[] | undefined;
 
   timeOptions = [
     { label: 'This Month', value: 'month' },
@@ -43,6 +44,10 @@ export class DashboardComponent implements OnInit {
   selectedTimeFrame = this.timeOptions[0];
   selectedTimeFrameViolators = this.timeOptions[1];
   selectedTimeFrameSummary = this.timeOptions[1];
+
+  constructor() {
+    this.dateRange = undefined;
+  }
 
   ngOnInit() {
     this.initSummaryCards();

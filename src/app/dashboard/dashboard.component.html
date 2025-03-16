@@ -1,132 +1,131 @@
-
-
-
-
 <div class="dashboard p-4">
-    <div class="header">
-        <h1>Dashboard</h1>       
-        
+  <div class="header">
+    <h1>Dashboard</h1>
+  </div>
+  
+  <div class="main-dashboard">
+    <div class="dashboard-main-content">
+      <!-- Summary Cards -->
+      <div class="grid summary-cards-grid">
+        <app-summary-card *ngFor="let card of summaryCards" [data]="card"></app-summary-card>
       </div>
 
-    <!-- Summary Cards -->
-    <div class="grid">
-      <div class="col-12 md:col-4 lg:col-3">
-        <app-summary-card [data]="summaryCards[0]"></app-summary-card>
-      </div>
-      <div class="col-12 md:col-4 lg:col-3">
-        <app-summary-card [data]="summaryCards[1]"></app-summary-card>
-      </div>
-      <div class="col-12 md:col-4 lg:col-3">
-        <app-summary-card [data]="summaryCards[2]"></app-summary-card>
-      </div>
-    </div>
-
-    <!-- Main Content -->
-    <div class="grid mt-4">
-      <!-- Top Users -->
-      <div class="col-12 md:col-4">
-        <div class="surface-card p-4 border-round-lg">
-          <div class="flex justify-content-between align-items-center mb-3">
-            <h2 class="text-xl font-medium m-0">Top spending users</h2>
-            <p-dropdown 
-              [options]="timeOptions" 
-              [(ngModel)]="selectedTimeFrame" 
-              optionLabel="label"
-              styleClass="p-dropdown-sm"
-            ></p-dropdown>
-          </div>
-          <div class="user-list">
-            <div class="user-header flex justify-content-between align-items-center p-3 border-bottom-1 surface-border">
-              <span class="text-sm font-semibold text-500">USERNAME</span>
-              <span class="text-sm font-semibold text-500">AMOUNT (INR)</span>
+      <div class="stats-and-sidebar mt-4">
+        <div class="stats-grid">
+          <!-- Top Violators -->
+          <div class="surface-card p-4 border-round-lg">
+            <div class="flex justify-content-between align-items-center mb-3">
+              <h2 class="text-xl font-medium m-0">Top violators</h2>
+              <p-dropdown
+                [options]="timeOptions"
+                [(ngModel)]="selectedTimeFrameViolators"
+                optionLabel="label"
+                styleClass="p-dropdown-sm"
+              ></p-dropdown>
             </div>
-            <app-profile-item *ngFor="let user of topUsers" [user]="user"></app-profile-item>
-          </div>
-        </div>
-      </div>
-
-      <!-- Top Violators -->
-      <div class="col-12 md:col-4">
-        <div class="surface-card p-4 border-round-lg">
-          <div class="flex justify-content-between align-items-center mb-3">
-            <h2 class="text-xl font-medium m-0">Top violators</h2>
-            <p-dropdown 
-              [options]="timeOptions" 
-              [(ngModel)]="selectedTimeFrameViolators" 
-              optionLabel="label"
-              styleClass="p-dropdown-sm"
-            ></p-dropdown>
-          </div>
-          <div class="user-list">
-            <app-profile-item *ngFor="let user of topViolators" [user]="user"></app-profile-item>
-            <div class="text-center mt-3">
-              <button 
-                pButton 
-                label="View All" 
-                icon="pi pi-arrow-right" 
-                class="p-button-text p-button-sm" 
-                iconPos="right"
-              ></button>
+            <div class="user-list">
+              <app-profile-item
+                *ngFor="let user of topViolators"
+                [user]="user"
+              ></app-profile-item>
+              <div class="text-center mt-3">
+                <button
+                  pButton
+                  label="View All"
+                  icon="pi pi-arrow-right"
+                  class="p-button-text p-button-sm"
+                  iconPos="right"
+                ></button>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
 
-      <!-- Overall Summary -->
-      <div class="col-12 md:col-4">
-        <div class="surface-card p-4 border-round-lg">
-          <div class="flex justify-content-between align-items-center mb-3">
-            <h2 class="text-xl font-medium m-0">Overall summary</h2>
-            <p-dropdown 
-              [options]="timeOptions" 
-              [(ngModel)]="selectedTimeFrameSummary" 
-              optionLabel="label"
-              styleClass="p-dropdown-sm"
-            ></p-dropdown>
-          </div>
-          <div class="summary-list">
-            <div *ngFor="let summary of overallSummary" class="summary-item flex align-items-center p-3 border-bottom-1 surface-border">
-              <div 
-                class="summary-icon flex align-items-center justify-content-center border-circle mr-3" 
-                [ngStyle]="{'background-color': summary.color + '20'}"
-                style="width: 40px; height: 40px;"
+          <!-- Overall Summary -->
+          <div class="surface-card p-4 border-round-lg">
+            <div class="flex justify-content-between align-items-center mb-3">
+              <h2 class="text-xl font-medium m-0">Overall summary</h2>
+              <p-dropdown
+                [options]="timeOptions"
+                [(ngModel)]="selectedTimeFrameSummary"
+                optionLabel="label"
+                styleClass="p-dropdown-sm"
+              ></p-dropdown>
+            </div>
+            <div class="summary-list">
+              <div
+                *ngFor="let summary of overallSummary"
+                class="summary-item flex align-items-center p-3 border-bottom-1 surface-border"
               >
-                <i [class]="summary.icon" [ngStyle]="{'color': summary.color}"></i>
-              </div>
-              <div class="flex-grow-1">
-                <div class="flex align-items-center">
-                  <span class="font-medium">{{ summary.title }}</span>
-                  <i *ngIf="summary.tooltip" class="pi pi-info-circle ml-2 text-500" pTooltip="{{ summary.tooltip }}"></i>
+                <div
+                  class="summary-icon flex align-items-center justify-content-center border-circle mr-3"
+                  [ngStyle]="{ 'background-color': summary.color + '20' }"
+                  style="width: 40px; height: 40px"
+                >
+                  <i
+                    [class]="summary.icon"
+                    [ngStyle]="{ color: summary.color }"
+                  ></i>
                 </div>
-                <div class="text-lg font-bold">₹ {{ summary.amount | number:'1.0-2' }}</div>
+                <div class="flex-grow-1">
+                  <div class="flex align-items-center">
+                    <span class="font-medium">{{ summary.title }}</span>
+                    <i
+                      *ngIf="summary.tooltip"
+                      class="pi pi-info-circle ml-2 text-500"
+                      pTooltip="{{ summary.tooltip }}"
+                    ></i>
+                  </div>
+                  <div class="text-lg font-bold">
+                    ₹ {{ summary.amount | number : "1.0-2" }}
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-3">
+                <button
+                  pButton
+                  label="View Analytics"
+                  icon="pi pi-arrow-right"
+                  class="p-button-text p-button-sm"
+                  iconPos="right"
+                ></button>
               </div>
             </div>
-            <div class="text-center mt-3">
-              <button 
-                pButton 
-                label="View Analytics" 
-                icon="pi pi-arrow-right" 
-                class="p-button-text p-button-sm" 
-                iconPos="right"
-              ></button>
+          </div>
+        </div>
+
+        <!-- Top Users Sidebar -->
+        <div class="dashboard-sidebar">
+          <div class="surface-card p-4 border-round-lg">
+            <div class="flex justify-content-between align-items-center mb-3">
+              <h2 class="text-xl font-medium m-0">Top spending users</h2>
+              <p-dropdown
+                [options]="timeOptions"
+                [(ngModel)]="selectedTimeFrame"
+                optionLabel="label"
+                styleClass="p-dropdown-sm"
+              ></p-dropdown>
+            </div>
+            <div class="user-list">
+              <div class="user-header flex justify-content-between align-items-center p-3 border-bottom-1 surface-border">
+                <span class="text-sm font-semibold text-500">USERNAME</span>
+                <span class="text-sm font-semibold text-500">AMOUNT (INR)</span>
+              </div>
+              <app-profile-item
+                *ngFor="let user of topUsers"
+                [user]="user"
+              ></app-profile-item>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Footer Sections -->
-    <div class="grid mt-4">
-      <div class="col-12 md:col-6">
+      <!-- Footer Sections -->
+      <div class="footer-grid">
         <app-contact-section></app-contact-section>
-      </div>
-      <div class="col-12 md:col-6">
         <app-resource-section></app-resource-section>
       </div>
     </div>
-
-    <!-- Footer -->
-    <div class="mt-4 text-center text-500">
-      © 2025 All Rights Reserved.
-    </div>
   </div>
+
+  <div class="mt-4 text-center text-500">© 2025 All Rights Reserved.</div>
+</div>

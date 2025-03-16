@@ -89,3 +89,9 @@ body {
   background-color: var(--surface-card);
   border: 1px solid var(--surface-border);
 }
+.user-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+}

@@ -12,142 +12,132 @@
     gap: 24px;
 }
 
-/* Desktop Screen Layout (Image 2 style) */
+/* Layout styles for all screen sizes */
+.main-dashboard {
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+}
+
+/* Main content area */
+.dashboard-main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Stats grid (Top violators + Overall summary) layout */
+.stats-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    flex: 1;
+}
+
+/* Base sidebar styles */
+.dashboard-sidebar {
+    width: 320px;
+    flex-shrink: 0;
+    background-color: rgb(238, 243, 247);
+    padding: 16px;
+    border-radius: 8px;
+}
+
+/* Footer styles */
+.footer-grid {
+    display: flex;
+    gap: 24px;
+    margin-top: 24px;
+}
+
+.footer-grid > * {
+    flex: 1;
+}
+
+/* Large screens (1367px and above) */
 @media (min-width: 1367px) {
-    /* Main dashboard becomes a row with sidebar */
-    .main-dashboard {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-    }
-    
-    /* Main content area */
-    .dashboard-main-content {
-        flex: 1;
-        min-width: 0;
-    }
-    
-    /* Summary cards in 3 columns */
     .summary-cards-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    
-    /* Stats grid (Top violators + Overall summary) in 2 columns */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 24px;
-        margin-top: 24px;
-    }
-    
-    /* Sidebar (Top spending users) */
-    .dashboard-sidebar {
-        width: 320px;
-        flex-shrink: 0;
-        background-color: rgb(238, 243, 247);
-        padding: 16px;
-        border-radius: 8px;
-        align-self: flex-start;
-    }
-    
-    /* Footer in 2 columns */
-    .footer-grid {
+
+    .stats-and-sidebar {
         display: flex;
-        flex-direction: row;
         gap: 24px;
         margin-top: 24px;
     }
-    
-    .footer-grid > * {
+
+    .stats-grid {
+        flex-direction: row;
+    }
+
+    .stats-grid > div {
         flex: 1;
     }
 }
 
-/* Laptop Screen Layout (Image 1 style) */
-@media (max-width: 1366px) {
-    /* Main dashboard as column */
-    .main-dashboard {
+/* Medium to large screens (1024px to 1366px) */
+@media (min-width: 1024px) and (max-width: 1366px) {
+    .summary-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-and-sidebar {
+        display: flex;
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .stats-grid {
         flex-direction: column;
     }
-    
-    /* Summary cards in 3 columns */
-    .summary-cards-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-    
-    /* Stats and sidebar in special layout */
-    .stats-and-sidebar {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        grid-template-areas: 
-            "violators topusers" 
-            "summary summary";
-        gap: 24px;
-        margin-top: 24px;
-    }
-    
-    /* Assign grid areas to components */
-    .stats-grid {
-        display: contents;
-    }
-    
-    .stats-grid > div:first-child {
-        grid-area: violators;
-    }
-    
-    .stats-grid > div:last-child {
-        grid-area: summary;
-    }
-    
-    .dashboard-sidebar {
-        grid-area: topusers;
-        background-color: rgb(238, 243, 247);
-        padding: 16px;
-        border-radius: 8px;
-    }
-    
-    /* Footer in row */
-    .footer-grid {
-        display: flex;
-        flex-direction: row;
-        gap: 24px;
-        margin-top: 24px;
-    }
-    
-    .footer-grid > * {
-        flex: 1;
-    }
 }
 
-/* Medium screens (tablets) */
-@media (max-width: 1023px) {
+/* Medium screens (768px to 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
     .summary-cards-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-    
+
     .stats-and-sidebar {
         display: flex;
         flex-direction: column;
         gap: 24px;
+        margin-top: 24px;
     }
-    
+
     .stats-grid {
-        display: flex;
         flex-direction: column;
-        gap: 24px;
+    }
+
+    .dashboard-sidebar {
+        width: 100%;
     }
 }
 
-/* Small screens (mobile) */
+/* Small screens (below 768px) */
 @media (max-width: 767px) {
     .summary-cards-grid {
         grid-template-columns: 1fr;
     }
-    
+
+    .stats-and-sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        margin-top: 24px;
+    }
+
+    .stats-grid {
+        flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+        width: 100%;
+    }
+
     .footer-grid {
         flex-direction: column;
     }
-    
+
     .footer-grid > * {
         width: 100%;
     }

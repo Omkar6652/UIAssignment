@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TabViewModule } from 'primeng/tabview';
 import { NotificationItem } from '../Models/HeaderModels';
@@ -8,7 +8,7 @@ import { NotificationItem } from '../Models/HeaderModels';
   standalone: true,
   imports: [CommonModule, TabViewModule],
   template: `
-    <div class="notification-panel surface-card p-3 border-round-lg shadow-2">
+    <div class="notification-panel surface-card p-3 border-round-lg shadow-2" (click)="$event.stopPropagation()">
       <p-tabView>
         <p-tabPanel header="Notifications">
           <ng-container *ngTemplateOutlet="notificationList; context: { items: notifications }">
@@ -43,6 +43,9 @@ import { NotificationItem } from '../Models/HeaderModels';
       max-height: 500px;
       overflow-y: auto;
       z-index: 1000;
+      background: var(--surface-card) !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
     }
     .notification-item.unread {
       background-color: var(--surface-hover);
